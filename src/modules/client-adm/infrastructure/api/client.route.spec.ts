@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import request from "supertest";
 import createClientRouter from "./client.route";
 import { AddClientFacadeInputDto } from "../../facade/client-adm.facade.dto";
+import ClientAdmFacade from "../../facade/client-adm.facade";
 
 describe("Client Routes", () => {
   let app: Express;
@@ -54,5 +55,23 @@ describe("Client Routes", () => {
       expect(response.status).toBe(500);
       expect(response.body.error).toBe("Erro ao criar cliente");
     });
+  });
+
+  it("deve retornar 500 se ocorrer erro no addClient", async () => {
+    const mockFacade = {
+      add: jest.fn().mockRejectedValue(new Error("Erro simulado")),
+      find: jest.fn(),
+    } as unknown as ClientAdmFacade;
+
+    const app = express();
+    app.use(express.json());
+    app.use(createClientRouter(mockFacade));
+
+    const response = await request(app)
+      .post("/clients")
+      .send({ name: "Teste", email: "teste@teste.com" });
+
+    expect(response.status).toBe(500);
+    expect(response.body).toHaveProperty("error", "Erro simulado");
   });
 }); 

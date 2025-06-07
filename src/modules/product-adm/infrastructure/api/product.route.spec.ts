@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import request from "supertest";
 import createProductRouter from "./product.route";
 import { AddProductFacadeInputDto } from "../../facade/product-adm.facade.dto";
+import ProductAdmFacade from "../../facade/product-adm.facade";
 
 describe("Product Routes", () => {
   let app: Express;
@@ -47,5 +48,23 @@ describe("Product Routes", () => {
       expect(response.status).toBe(500);
       expect(response.body.error).toBe("Erro ao criar produto");
     });
+  });
+
+  it("deve retornar 500 se ocorrer erro no addProduct", async () => {
+    const mockFacade = {
+      addProduct: jest.fn().mockRejectedValue(new Error("Erro simulado")),
+      checkStock: jest.fn(),
+    } as unknown as ProductAdmFacade;
+
+    const app = express();
+    app.use(express.json());
+    app.use(createProductRouter(mockFacade));
+
+    const response = await request(app)
+      .post("/products")
+      .send({ name: "Produto Teste", description: "desc", purchasePrice: 10, stock: 1 });
+
+    expect(response.status).toBe(500);
+    expect(response.body).toHaveProperty("error", "Erro simulado");
   });
 }); 

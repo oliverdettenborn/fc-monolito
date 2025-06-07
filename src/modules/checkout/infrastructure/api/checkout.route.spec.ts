@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import request from "supertest";
 import createCheckoutRouter from "./checkout.route";
 import { PlaceOrderFacadeInputDto } from "../../facade/checkout.facade.dto";
+import CheckoutFacade from "../../facade/checkout.facade";
 
 describe("Checkout Routes", () => {
   let app: Express;
@@ -56,5 +57,22 @@ describe("Checkout Routes", () => {
       expect(response.status).toBe(500);
       expect(response.body.error).toBe("Erro ao criar pedido");
     });
+  });
+
+  it("deve retornar 500 se ocorrer erro no placeOrder", async () => {
+    const mockFacade = {
+      placeOrder: jest.fn().mockRejectedValue(new Error("Erro simulado")),
+    } as unknown as CheckoutFacade;
+
+    const app = express();
+    app.use(express.json());
+    app.use(createCheckoutRouter(mockFacade));
+
+    const response = await request(app)
+      .post("/checkout")
+      .send({ clientId: "1", products: [] });
+
+    expect(response.status).toBe(500);
+    expect(response.body).toHaveProperty("error", "Erro simulado");
   });
 }); 
