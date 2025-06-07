@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from "express";
 import ClientAdmFacade from "../../facade/client-adm.facade";
 import { AddClientFacadeInputDto } from "../../facade/client-adm.facade.dto";
+import ClientAdmFacadeFactory from "../../factory/client-adm.facade.factory";
 
 function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -12,7 +13,7 @@ function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => P
   };
 }
 
-export default function createClientRouter(facade: ClientAdmFacade) {
+export default function createClientRouter(facade: ClientAdmFacade = ClientAdmFacadeFactory.create()) {
   const router = Router();
 
   router.post("/clients", asyncHandler(async (req: Request, res: Response) => {

@@ -1,8 +1,8 @@
 import { Router } from "express";
 import InvoiceFacade from "../../facade/invoice.facade";
-import InvoiceRepository from "../../repository/invoice.repository";
+import InvoiceFacadeFactory from "../../factory/invoice.facade.factory";
 
-export default function createInvoiceRouter(facade: InvoiceFacade = new InvoiceFacade(new InvoiceRepository())) {
+export default function createInvoiceRouter(facade: InvoiceFacade = InvoiceFacadeFactory.create()) {
   const router = Router();
 
   router.post("/invoice", async (req, res) => {

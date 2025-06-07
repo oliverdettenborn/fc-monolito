@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from "express";
 import CheckoutFacade from "../../facade/checkout.facade";
+import CheckoutFacadeFactory from "../../factory/checkout.facade.factory";
 
 function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -11,7 +12,7 @@ function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => P
   };
 }
 
-export default function createCheckoutRouter(facade: CheckoutFacade = new CheckoutFacade()) {
+export default function createCheckoutRouter(facade: CheckoutFacade = CheckoutFacadeFactory.create()) {
   const router = Router();
 
   router.post("/checkout", asyncHandler(async (req: Request, res: Response) => {
