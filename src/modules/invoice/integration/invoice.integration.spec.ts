@@ -1,35 +1,26 @@
 import { Sequelize } from "sequelize-typescript";
-import { migrator } from "../../../test-migrations/config-migrations/migrator";
+import { Umzug } from "umzug";
 import InvoiceModel from "../repository/invoice.model";
 import InvoiceItemModel from "../repository/invoice-item.model";
-import InvoiceFacade from "./invoice.facade";
-import { Umzug } from "umzug";
+import InvoiceFacade from "../facade/invoice.facade";
+import { setupTestDatabase, teardownTestDatabase } from "../../../test-migrations/config-migrations/test-setup";
 
-describe("Invoice Facade unit test", () => {
+describe("Invoice Integration Tests", () => {
   let sequelize: Sequelize;
   let migration: Umzug<any>;
   let facade: InvoiceFacade;
 
   beforeEach(async () => {
-    sequelize = new Sequelize({
-      dialect: "sqlite",
-      storage: ":memory:",
-      logging: false,
+    const setup = await setupTestDatabase({
+      models: [InvoiceModel, InvoiceItemModel],
     });
-
-    sequelize.addModels([InvoiceModel, InvoiceItemModel]);
-    migration = migrator(sequelize);
-    await migration.up();
+    sequelize = setup.sequelize;
+    migration = setup.migration;
     facade = new InvoiceFacade();
   });
 
   afterEach(async () => {
-    if (!migration || !sequelize) {
-      return;
-    }
-    migration = migrator(sequelize);
-    await migration.down();
-    await sequelize.close();
+    await teardownTestDatabase(sequelize, migration);
   });
 
   it("should generate an invoice", async () => {
