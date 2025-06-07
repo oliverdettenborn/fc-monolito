@@ -1,16 +1,19 @@
-import InvoiceRepository from "../repository/invoice.repository";
-import GenerateInvoiceUseCase from "../usecase/generate-invoice/generate-invoice.usecase";
-import FindInvoiceUseCase from "../usecase/find-invoice/find-invoice.usecase";
+import UseCaseInterface from "../../@shared/usecase/use-case.interface";
 import { GenerateInvoiceUseCaseInputDto, GenerateInvoiceUseCaseOutputDto } from "../usecase/generate-invoice/generate-invoice.dto";
 import { FindInvoiceUseCaseInputDTO, FindInvoiceUseCaseOutputDTO } from "../usecase/find-invoice/find-invoice.dto";
 
-export default class InvoiceFacade {
-  private _generateInvoiceUseCase: GenerateInvoiceUseCase;
-  private _findInvoiceUseCase: FindInvoiceUseCase;
+export interface UseCaseProps {
+  generateInvoiceUseCase: UseCaseInterface;
+  findInvoiceUseCase: UseCaseInterface;
+}
 
-  constructor(invoiceRepository: InvoiceRepository) {
-    this._generateInvoiceUseCase = new GenerateInvoiceUseCase(invoiceRepository);
-    this._findInvoiceUseCase = new FindInvoiceUseCase(invoiceRepository);
+export default class InvoiceFacade {
+  private _generateInvoiceUseCase: UseCaseInterface;
+  private _findInvoiceUseCase: UseCaseInterface;
+
+  constructor(usecaseProps: UseCaseProps) {
+    this._generateInvoiceUseCase = usecaseProps.generateInvoiceUseCase;
+    this._findInvoiceUseCase = usecaseProps.findInvoiceUseCase;
   }
 
   async generate(input: GenerateInvoiceUseCaseInputDto): Promise<GenerateInvoiceUseCaseOutputDto> {

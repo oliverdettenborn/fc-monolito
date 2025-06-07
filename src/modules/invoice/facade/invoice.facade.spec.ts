@@ -4,17 +4,11 @@ import InvoiceModel from "../repository/invoice.model";
 import InvoiceItemModel from "../repository/invoice-item.model";
 import InvoiceFacade from "./invoice.facade";
 import { Umzug } from "umzug";
-import InvoiceRepository from "../repository/invoice.repository";
-import Invoice from "../domain/entity/invoice";
-import Id from "../../@shared/domain/value-object/id.value-object";
-import Address from "../domain/value-object/address";
-import InvoiceItem from "../domain/entity/invoice-item";
+import InvoiceFacadeFactory from "../factory/invoice.facade.factory";
 
-describe("Invoice Facade unit test", () => {
+describe("Invoice Facade test", () => {
   let sequelize: Sequelize;
   let migration: Umzug<any>;
-  let facade: InvoiceFacade;
-  let mockInvoiceRepository: jest.Mocked<InvoiceRepository>;
 
   beforeEach(async () => {
     sequelize = new Sequelize({
@@ -26,13 +20,6 @@ describe("Invoice Facade unit test", () => {
     sequelize.addModels([InvoiceModel, InvoiceItemModel]);
     migration = migrator(sequelize);
     await migration.up();
-
-    mockInvoiceRepository = {
-      generate: jest.fn(),
-      find: jest.fn(),
-    } as any;
-
-    facade = new InvoiceFacade(mockInvoiceRepository);
   });
 
   afterEach(async () => {
@@ -45,6 +32,8 @@ describe("Invoice Facade unit test", () => {
   });
 
   it("should generate an invoice", async () => {
+    const facade = InvoiceFacadeFactory.create();
+
     const input = {
       name: "Invoice 1",
       document: "123456789",
@@ -68,11 +57,9 @@ describe("Invoice Facade unit test", () => {
       ],
     };
 
-    mockInvoiceRepository.generate.mockResolvedValue();
-
     const result = await facade.generate(input);
 
-    expect(typeof result.id).toBe("string");
+    expect(result.id).toBeDefined();
     expect(result.name).toBe(input.name);
     expect(result.document).toBe(input.document);
     expect(result.street).toBe(input.street);
@@ -86,45 +73,43 @@ describe("Invoice Facade unit test", () => {
   });
 
   it("should find an invoice", async () => {
-    const mockInvoice = new Invoice({
-      id: new Id("1"),
+    const facade = InvoiceFacadeFactory.create();
+
+    const input = {
       name: "Invoice 1",
       document: "123456789",
-      address: new Address(
-        "Street 1",
-        "1",
-        "Complement 1",
-        "City 1",
-        "State 1",
-        "12345-678"
-      ),
+      street: "Street 1",
+      number: "1",
+      complement: "Complement 1",
+      city: "City 1",
+      state: "State 1",
+      zipCode: "12345-678",
       items: [
-        new InvoiceItem({
-          id: new Id("1"),
+        {
+          id: "1",
           name: "Item 1",
           price: 100,
-        }),
-        new InvoiceItem({
-          id: new Id("2"),
+        },
+        {
+          id: "2",
           name: "Item 2",
           price: 200,
-        }),
+        },
       ],
-    });
+    };
 
-    mockInvoiceRepository.find.mockResolvedValue(mockInvoice);
+    const created = await facade.generate(input);
+    const result = await facade.find({ id: created.id });
 
-    const result = await facade.find({ id: "1" });
-
-    expect(result.id).toBe("1");
-    expect(result.name).toBe(mockInvoice.name);
-    expect(result.document).toBe(mockInvoice.document);
-    expect(result.address.street).toBe(mockInvoice.address.street);
-    expect(result.address.number).toBe(mockInvoice.address.number);
-    expect(result.address.complement).toBe(mockInvoice.address.complement);
-    expect(result.address.city).toBe(mockInvoice.address.city);
-    expect(result.address.state).toBe(mockInvoice.address.state);
-    expect(result.address.zipCode).toBe(mockInvoice.address.zipCode);
+    expect(result.id).toBe(created.id);
+    expect(result.name).toBe(input.name);
+    expect(result.document).toBe(input.document);
+    expect(result.address.street).toBe(input.street);
+    expect(result.address.number).toBe(input.number);
+    expect(result.address.complement).toBe(input.complement);
+    expect(result.address.city).toBe(input.city);
+    expect(result.address.state).toBe(input.state);
+    expect(result.address.zipCode).toBe(input.zipCode);
     expect(result.items).toHaveLength(2);
     expect(result.total).toBe(300);
   });
