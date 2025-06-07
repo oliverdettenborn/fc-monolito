@@ -8,8 +8,7 @@ export default class InvoiceFacade {
   private _generateInvoiceUseCase: GenerateInvoiceUseCase;
   private _findInvoiceUseCase: FindInvoiceUseCase;
 
-  constructor() {
-    const invoiceRepository = new InvoiceRepository();
+  constructor(invoiceRepository: InvoiceRepository) {
     this._generateInvoiceUseCase = new GenerateInvoiceUseCase(invoiceRepository);
     this._findInvoiceUseCase = new FindInvoiceUseCase(invoiceRepository);
   }

@@ -1,29 +1,55 @@
+import request from "supertest";
 import { Sequelize } from "sequelize-typescript";
 import { Umzug } from "umzug";
+import InvoiceFacade from "../facade/invoice.facade";
+import InvoiceRepository from "../repository/invoice.repository";
+import { migrator } from "../../../test-migrations/config-migrations/migrator";
+import app from "../../../app";
+import Invoice from "../domain/entity/invoice";
+import Id from "../../@shared/domain/value-object/id.value-object";
+import Address from "../domain/value-object/address";
+import InvoiceItem from "../domain/entity/invoice-item";
 import InvoiceModel from "../repository/invoice.model";
 import InvoiceItemModel from "../repository/invoice-item.model";
-import InvoiceFacade from "../facade/invoice.facade";
-import { setupTestDatabase, teardownTestDatabase } from "../../../test-migrations/config-migrations/test-setup";
 
-describe("Invoice Integration Tests", () => {
+declare global {
+  // eslint-disable-next-line no-var
+  var invoiceId: string;
+}
+
+describe("Invoice API Integration Test", () => {
   let sequelize: Sequelize;
   let migration: Umzug<any>;
   let facade: InvoiceFacade;
+  let mockInvoiceRepository: jest.Mocked<InvoiceRepository>;
 
   beforeEach(async () => {
-    const setup = await setupTestDatabase({
-      models: [InvoiceModel, InvoiceItemModel],
+    sequelize = new Sequelize({
+      dialect: "sqlite",
+      storage: ":memory:",
+      logging: false,
     });
-    sequelize = setup.sequelize;
-    migration = setup.migration;
-    facade = new InvoiceFacade();
+
+    sequelize.addModels([InvoiceModel, InvoiceItemModel]);
+    await sequelize.sync();
+
+    migration = migrator(sequelize);
+    await migration.up();
+
+    mockInvoiceRepository = {
+      generate: jest.fn(),
+      find: jest.fn(),
+    } as any;
+
+    facade = new InvoiceFacade(mockInvoiceRepository);
   });
 
   afterEach(async () => {
-    await teardownTestDatabase(sequelize, migration);
+    await migration.down();
+    await sequelize.close();
   });
 
-  it("should generate an invoice", async () => {
+  it("should create an invoice", async () => {
     const input = {
       name: "Invoice 1",
       document: "123456789",
@@ -47,22 +73,28 @@ describe("Invoice Integration Tests", () => {
       ],
     };
 
-    const result = await facade.generate(input);
+    const response = await request(app)
+      .post("/invoice")
+      .send(input);
 
-    expect(result.id).toBeDefined();
-    expect(result.name).toBe(input.name);
-    expect(result.document).toBe(input.document);
-    expect(result.street).toBe(input.street);
-    expect(result.number).toBe(input.number);
-    expect(result.complement).toBe(input.complement);
-    expect(result.city).toBe(input.city);
-    expect(result.state).toBe(input.state);
-    expect(result.zipCode).toBe(input.zipCode);
-    expect(result.items).toHaveLength(2);
-    expect(result.total).toBe(300);
+    expect(response.status).toBe(201);
+    expect(typeof response.body.id).toBe("string");
+    expect(response.body).toMatchObject({
+      name: input.name,
+      document: input.document,
+      street: input.street,
+      number: input.number,
+      complement: input.complement,
+      city: input.city,
+      state: input.state,
+      zipCode: input.zipCode,
+      items: input.items,
+      total: 300,
+    });
   });
 
   it("should find an invoice", async () => {
+    // Cria a nota fiscal antes de buscar
     const input = {
       name: "Invoice 1",
       document: "123456789",
@@ -85,20 +117,32 @@ describe("Invoice Integration Tests", () => {
         },
       ],
     };
+    const createResponse = await request(app)
+      .post("/invoice")
+      .send(input);
+    const id = createResponse.body.id;
 
-    const generatedInvoice = await facade.generate(input);
-    const result = await facade.find({ id: generatedInvoice.id });
+    const response = await request(app)
+      .get(`/invoice/${id}`);
 
-    expect(result.id).toBe(generatedInvoice.id);
-    expect(result.name).toBe(input.name);
-    expect(result.document).toBe(input.document);
-    expect(result.address.street).toBe(input.street);
-    expect(result.address.number).toBe(input.number);
-    expect(result.address.complement).toBe(input.complement);
-    expect(result.address.city).toBe(input.city);
-    expect(result.address.state).toBe(input.state);
-    expect(result.address.zipCode).toBe(input.zipCode);
-    expect(result.items).toHaveLength(2);
-    expect(result.total).toBe(300);
+    expect(response.status).toBe(200);
+    expect(typeof response.body.id).toBe("string");
+    expect(response.body).toMatchObject({
+      name: "Invoice 1",
+      document: "123456789",
+      address: {
+        street: "Street 1",
+        number: "1",
+        complement: "Complement 1",
+        city: "City 1",
+        state: "State 1",
+        zipCode: "12345-678",
+      },
+      items: [
+        { id: "1", name: "Item 1", price: 100 },
+        { id: "2", name: "Item 2", price: 200 },
+      ],
+      total: 300,
+    });
   });
 }); 

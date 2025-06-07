@@ -38,7 +38,7 @@ describe("Invoice Routes", () => {
       ]
     };
 
-    it("deve retornar 200 e os dados da nota fiscal quando gerada com sucesso", async () => {
+    it("deve retornar 201 e os dados da nota fiscal quando gerada com sucesso", async () => {
       const mockResponse: GenerateInvoiceUseCaseOutputDto = {
         id: "789",
         ...mockInvoiceData,
@@ -50,7 +50,7 @@ describe("Invoice Routes", () => {
         .post("/invoice")
         .send(mockInvoiceData);
 
-      expect(response.status).toBe(200);
+      expect(response.status).toBe(201);
       expect(response.body).toEqual(mockResponse);
       expect(mockGenerate).toHaveBeenCalledWith(mockInvoiceData);
     });

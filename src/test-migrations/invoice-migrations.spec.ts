@@ -45,7 +45,7 @@ describe("Invoice tests", () => {
       ]
     })
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(201);
     expect(response.body.name).toBe("John Doe")
     expect(response.body.document).toBe("12345678900")
     expect(response.body.items).toHaveLength(1)

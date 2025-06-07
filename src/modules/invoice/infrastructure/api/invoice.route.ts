@@ -1,32 +1,26 @@
-import { Router, Request, Response, NextFunction } from "express";
+import { Router } from "express";
 import InvoiceFacade from "../../facade/invoice.facade";
+import InvoiceRepository from "../../repository/invoice.repository";
 
-function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
-  return async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      await fn(req, res, next);
-    } catch (error) {
-      next(error);
-    }
-  };
-}
-
-export default function createInvoiceRouter(facade: InvoiceFacade = new InvoiceFacade()) {
+export default function createInvoiceRouter(facade: InvoiceFacade = new InvoiceFacade(new InvoiceRepository())) {
   const router = Router();
 
-  router.post("/invoice", asyncHandler(async (req: Request, res: Response) => {
-    const result = await facade.generate(req.body);
-    res.status(200).json(result);
-  }));
+  router.post("/invoice", async (req, res) => {
+    try {
+      const invoice = await facade.generate(req.body);
+      res.status(201).json(invoice);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
-  router.get("/invoice/:id", asyncHandler(async (req: Request, res: Response) => {
-    const result = await facade.find({ id: req.params.id });
-    res.status(200).json(result);
-  }));
-
-  // Middleware de erro para garantir resposta 500
-  router.use((err: any, req: Request, res: Response, next: NextFunction) => {
-    res.status(500).json({ error: err?.message || "Internal server error" });
+  router.get("/invoice/:id", async (req, res) => {
+    try {
+      const invoice = await facade.find({ id: req.params.id });
+      res.status(200).json(invoice);
+    } catch (error: any) {
+      res.status(500).json({ error: error.message });
+    }
   });
 
   return router;
