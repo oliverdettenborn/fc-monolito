@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1749264297851" clover="3.2.0">
+  <project timestamp="1749264297851" name="All files">
+    <metrics statements="363" coveredstatements="336" conditionals="54" coveredconditionals="23" methods="126" coveredmethods="116" elements="543" coveredelements="475" complexity="0" loc="363" ncloc="363" packages="34" files="43" classes="43"/>
+    <package name="modules.@shared.domain.entity">
+      <metrics statements="9" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="4"/>
+      <file name="base.entity.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/@shared/domain/entity/base.entity.ts">
+        <metrics statements="9" coveredstatements="8" conditionals="6" coveredconditionals="6" methods="5" coveredmethods="4"/>
+        <line num="1" count="21" type="stmt"/>
+        <line num="3" count="21" type="stmt"/>
+        <line num="9" count="59" type="cond" truecount="2" falsecount="0"/>
+        <line num="10" count="59" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="59" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="78" type="stmt"/>
+        <line num="19" count="29" type="stmt"/>
+        <line num="23" count="26" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.@shared.domain.value-object">
+      <metrics statements="35" coveredstatements="23" conditionals="8" coveredconditionals="2" methods="10" coveredmethods="9"/>
+      <file name="address.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/@shared/domain/value-object/address.ts">
+        <metrics statements="31" coveredstatements="19" conditionals="6" coveredconditionals="0" methods="8" coveredmethods="7"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="15" type="stmt"/>
+        <line num="5" count="15" type="stmt"/>
+        <line num="6" count="15" type="stmt"/>
+        <line num="7" count="15" type="stmt"/>
+        <line num="8" count="15" type="stmt"/>
+        <line num="9" count="15" type="stmt"/>
+        <line num="12" count="15" type="stmt"/>
+        <line num="13" count="15" type="stmt"/>
+        <line num="14" count="15" type="stmt"/>
+        <line num="15" count="15" type="stmt"/>
+        <line num="16" count="15" type="stmt"/>
+        <line num="17" count="15" type="stmt"/>
+        <line num="22" count="16" type="stmt"/>
+        <line num="26" count="15" type="stmt"/>
+        <line num="30" count="15" type="stmt"/>
+        <line num="34" count="15" type="stmt"/>
+        <line num="38" count="15" type="stmt"/>
+        <line num="42" count="15" type="stmt"/>
+        <line num="46" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="49" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="52" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="55" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="58" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="61" count="0" type="cond" truecount="0" falsecount="1"/>
+        <line num="62" count="0" type="stmt"/>
+      </file>
+      <file name="id.value-object.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/@shared/domain/value-object/id.value-object.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="21" type="stmt"/>
+        <line num="4" count="21" type="stmt"/>
+        <line num="8" count="57" type="cond" truecount="2" falsecount="0"/>
+        <line num="12" count="77" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.client-adm.domain">
+      <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+      <file name="client.entity.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/client-adm/domain/client.entity.ts">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="5"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="24" count="7" type="stmt"/>
+        <line num="25" count="7" type="stmt"/>
+        <line num="26" count="7" type="stmt"/>
+        <line num="27" count="7" type="stmt"/>
+        <line num="28" count="7" type="stmt"/>
+        <line num="32" count="11" type="stmt"/>
+        <line num="36" count="11" type="stmt"/>
+        <line num="40" count="9" type="stmt"/>
+        <line num="44" count="61" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.client-adm.facade">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="client-adm.facade.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/client-adm/facade/client-adm.facade.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.client-adm.factory">
+      <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="client-adm.facade.factory.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/client-adm/factory/client-adm.facade.factory.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.client-adm.repository">
+      <metrics statements="12" coveredstatements="11" conditionals="5" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <file name="client.model.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/client-adm/repository/client.model.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="2" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+      </file>
+      <file name="client.repository.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/client-adm/repository/client.repository.ts">
+        <metrics statements="10" coveredstatements="9" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="31" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.client-adm.usecase.add-client">
+      <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+      <file name="add-client.usecase.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/client-adm/usecase/add-client/add-client.usecase.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
+        <line num="33" count="3" type="stmt"/>
+        <line num="35" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.client-adm.usecase.find-client">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="find-client.usecase.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/client-adm/usecase/find-client/find-client.usecase.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.invoice.domain.entity">
+      <metrics statements="24" coveredstatements="24" conditionals="1" coveredconditionals="1" methods="12" coveredmethods="12"/>
+      <file name="invoice-item.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/invoice/domain/entity/invoice-item.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="17" count="19" type="stmt"/>
+        <line num="18" count="19" type="stmt"/>
+        <line num="19" count="19" type="stmt"/>
+        <line num="23" count="26" type="stmt"/>
+        <line num="27" count="45" type="stmt"/>
+      </file>
+      <file name="invoice.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/invoice/domain/entity/invoice.ts">
+        <metrics statements="17" coveredstatements="17" conditionals="1" coveredconditionals="1" methods="9" coveredmethods="9"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="25" count="11" type="stmt"/>
+        <line num="26" count="11" type="stmt"/>
+        <line num="27" count="11" type="stmt"/>
+        <line num="28" count="11" type="stmt"/>
+        <line num="29" count="11" type="stmt"/>
+        <line num="30" count="11" type="stmt"/>
+        <line num="31" count="11" type="stmt"/>
+        <line num="35" count="15" type="stmt"/>
+        <line num="39" count="15" type="stmt"/>
+        <line num="43" count="85" type="stmt"/>
+        <line num="47" count="15" type="stmt"/>
+        <line num="51" count="10" type="stmt"/>
+        <line num="55" count="19" type="stmt"/>
+        <line num="59" count="11" type="cond" truecount="1" falsecount="0"/>
+        <line num="60" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.invoice.domain.value-object">
+      <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="7"/>
+      <file name="address.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/invoice/domain/value-object/address.ts">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="7"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="17" count="11" type="stmt"/>
+        <line num="18" count="11" type="stmt"/>
+        <line num="19" count="11" type="stmt"/>
+        <line num="20" count="11" type="stmt"/>
+        <line num="21" count="11" type="stmt"/>
+        <line num="22" count="11" type="stmt"/>
+        <line num="26" count="14" type="stmt"/>
+        <line num="30" count="14" type="stmt"/>
+        <line num="34" count="14" type="stmt"/>
+        <line num="38" count="14" type="stmt"/>
+        <line num="42" count="14" type="stmt"/>
+        <line num="46" count="14" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.invoice.facade">
+      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="invoice.facade.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/invoice/facade/invoice.facade.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.invoice.infrastructure.api">
+      <metrics statements="15" coveredstatements="10" conditionals="12" coveredconditionals="0" methods="2" coveredmethods="1"/>
+      <file name="invoice.route.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/invoice/infrastructure/api/invoice.route.ts">
+        <metrics statements="15" coveredstatements="10" conditionals="12" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="21" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="25" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.invoice.repository">
+      <metrics statements="25" coveredstatements="24" conditionals="3" coveredconditionals="1" methods="7" coveredmethods="7"/>
+      <file name="invoice-item.model.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/invoice/repository/invoice-item.model.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="16" count="10" type="stmt"/>
+        <line num="35" count="10" type="stmt"/>
+      </file>
+      <file name="invoice.model.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/invoice/repository/invoice.model.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="64" count="17" type="stmt"/>
+      </file>
+      <file name="invoice.repository.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/invoice/repository/invoice.repository.ts">
+        <metrics statements="16" coveredstatements="15" conditionals="1" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="22" count="9" type="stmt"/>
+        <line num="37" count="2" type="stmt"/>
+        <line num="42" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="46" count="2" type="stmt"/>
+        <line num="55" count="2" type="stmt"/>
+        <line num="57" count="4" type="stmt"/>
+        <line num="66" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.invoice.usecase.find-invoice">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="find-invoice.usecase.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/invoice/usecase/find-invoice/find-invoice.usecase.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="7" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.invoice.usecase.generate-invoice">
+      <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <file name="generate-invoice.usecase.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/invoice/usecase/generate-invoice/generate-invoice.usecase.ts">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+        <line num="9" count="6" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="23" count="11" type="stmt"/>
+        <line num="30" count="6" type="stmt"/>
+        <line num="37" count="6" type="stmt"/>
+        <line num="39" count="6" type="stmt"/>
+        <line num="49" count="11" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.payment.domain">
+      <metrics statements="17" coveredstatements="16" conditionals="5" coveredconditionals="4" methods="8" coveredmethods="8"/>
+      <file name="transaction.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/payment/domain/transaction.ts">
+        <metrics statements="17" coveredstatements="16" conditionals="5" coveredconditionals="4" methods="8" coveredmethods="8"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="20" count="6" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
+        <line num="23" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="24" count="6" type="stmt"/>
+        <line num="28" count="6" type="cond" truecount="0" falsecount="1"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="42" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="43" count="2" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="50" count="9" type="stmt"/>
+        <line num="54" count="9" type="stmt"/>
+        <line num="58" count="8" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.payment.facade">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="payment.facade.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/payment/facade/payment.facade.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.payment.factory">
+      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="payment.facade.factory.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/payment/factory/payment.facade.factory.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.payment.repository">
+      <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="transaction.model.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/payment/repository/transaction.model.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="2" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+      </file>
+      <file name="transaction.repository.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/payment/repository/transaction.repository.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.payment.usecase.process-payment">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="process-payment.usecase.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/payment/usecase/process-payment/process-payment.usecase.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="24" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.product-adm.domain">
+      <metrics statements="15" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="5"/>
+      <file name="product.entity.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/product-adm/domain/product.entity.ts">
+        <metrics statements="15" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="9" coveredmethods="5"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="22" count="7" type="stmt"/>
+        <line num="23" count="7" type="stmt"/>
+        <line num="24" count="7" type="stmt"/>
+        <line num="25" count="7" type="stmt"/>
+        <line num="26" count="7" type="stmt"/>
+        <line num="30" count="7" type="stmt"/>
+        <line num="34" count="7" type="stmt"/>
+        <line num="38" count="7" type="stmt"/>
+        <line num="42" count="9" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.product-adm.facade">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="product-adm.facade.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/product-adm/facade/product-adm.facade.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.product-adm.factory">
+      <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="facade.factory.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/product-adm/factory/facade.factory.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.product-adm.repository">
+      <metrics statements="11" coveredstatements="10" conditionals="5" coveredconditionals="2" methods="2" coveredmethods="2"/>
+      <file name="product.model.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/product-adm/repository/product.model.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="2" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+      </file>
+      <file name="product.repository.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/product-adm/repository/product.repository.ts">
+        <metrics statements="9" coveredstatements="8" conditionals="1" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="23" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.product-adm.usecase.add-product">
+      <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="add-product.usecase.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/product-adm/usecase/add-product/add-product.usecase.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.product-adm.usecase.check-stock">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="check-stock.usecase.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/product-adm/usecase/check-stock/check-stock.usecase.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.store-catalog.domain">
+      <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+      <file name="product.entity.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/store-catalog/domain/product.entity.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="18" count="9" type="stmt"/>
+        <line num="19" count="9" type="stmt"/>
+        <line num="20" count="9" type="stmt"/>
+        <line num="21" count="9" type="stmt"/>
+        <line num="25" count="9" type="stmt"/>
+        <line num="29" count="9" type="stmt"/>
+        <line num="33" count="9" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.store-catalog.facade">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="store-catalog.facade.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/store-catalog/facade/store-catalog.facade.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.store-catalog.factory">
+      <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="facade.factory.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/store-catalog/factory/facade.factory.ts">
+        <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.store-catalog.repository">
+      <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="product.model.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/store-catalog/repository/product.model.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+      </file>
+      <file name="product.repository.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/store-catalog/repository/product.repository.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.store-catalog.usecase.find-all-products">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+      <file name="find-all-products.usecase.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/store-catalog/usecase/find-all-products/find-all-products.usecase.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="3"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="modules.store-catalog.usecase.find-product">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="find-product.usecase.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/modules/store-catalog/usecase/find-product/find-product.usecase.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="test-migrations.config-migrations">
+      <metrics statements="17" coveredstatements="16" conditionals="3" coveredconditionals="2" methods="7" coveredmethods="4"/>
+      <file name="migrator.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/test-migrations/config-migrations/migrator.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="2"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="8" count="7" type="stmt"/>
+      </file>
+      <file name="test-setup.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/test-migrations/config-migrations/test-setup.ts">
+        <metrics statements="13" coveredstatements="12" conditionals="3" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="24" count="3" type="cond" truecount="2" falsecount="1"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="28" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="test-migrations.migrations">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+      <file name="2024.02.17T00.00.00.create-invoice-table.ts" path="/Users/oliver.dettenborn/Documents/fc-monolito/src/test-migrations/migrations/2024.02.17T00.00.00.create-invoice-table.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="53" count="5" type="stmt"/>
+        <line num="86" count="3" type="stmt"/>
+        <line num="87" count="5" type="stmt"/>
+        <line num="88" count="5" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

@@ -4,13 +4,13 @@ import request from 'supertest'
 import InvoiceModel from "../modules/invoice/repository/invoice.model"
 import InvoiceItemModel from "../modules/invoice/repository/invoice-item.model"
 import { Umzug } from "umzug"
-import invoiceRoutes from "../modules/invoice/infrastructure/api/invoice.route"
+import createInvoiceRouter from "../modules/invoice/infrastructure/api/invoice.route"
 import { setupTestDatabase, teardownTestDatabase } from "./config-migrations/test-setup"
 
 describe("Invoice tests", () => {
   const app: Express = express()
   app.use(express.json())
-  app.use(invoiceRoutes)
+  app.use(createInvoiceRouter())
 
   let sequelize: Sequelize
   let migration: Umzug<any>;
