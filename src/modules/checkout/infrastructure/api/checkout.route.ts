@@ -21,7 +21,7 @@ export default function createCheckoutRouter(facade: CheckoutFacade = CheckoutFa
   }));
 
   // Middleware de erro para garantir resposta 500
-  router.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  router.use((err: any, req: Request, res: Response, _next: NextFunction) => {
     res.status(500).json({ error: err?.message || "Internal server error" });
   });
 

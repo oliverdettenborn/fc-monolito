@@ -68,28 +68,6 @@ describe("Invoice Facade unit test", () => {
       ],
     };
 
-    const mockInvoice = new Invoice({
-      id: new Id("1"),
-      name: input.name,
-      document: input.document,
-      address: new Address(
-        input.street,
-        input.number,
-        input.complement,
-        input.city,
-        input.state,
-        input.zipCode
-      ),
-      items: input.items.map(
-        (item) =>
-          new InvoiceItem({
-            id: new Id(item.id),
-            name: item.name,
-            price: item.price,
-          })
-      ),
-    });
-
     mockInvoiceRepository.generate.mockResolvedValue();
 
     const result = await facade.generate(input);

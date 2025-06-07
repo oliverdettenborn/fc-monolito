@@ -5,22 +5,12 @@ import InvoiceFacade from "../facade/invoice.facade";
 import InvoiceRepository from "../repository/invoice.repository";
 import { migrator } from "../../../test-migrations/config-migrations/migrator";
 import app from "../../../app";
-import Invoice from "../domain/entity/invoice";
-import Id from "../../@shared/domain/value-object/id.value-object";
-import Address from "../domain/value-object/address";
-import InvoiceItem from "../domain/entity/invoice-item";
 import InvoiceModel from "../repository/invoice.model";
 import InvoiceItemModel from "../repository/invoice-item.model";
-
-declare global {
-  // eslint-disable-next-line no-var
-  var invoiceId: string;
-}
 
 describe("Invoice API Integration Test", () => {
   let sequelize: Sequelize;
   let migration: Umzug<any>;
-  let facade: InvoiceFacade;
   let mockInvoiceRepository: jest.Mocked<InvoiceRepository>;
 
   beforeEach(async () => {
@@ -40,8 +30,6 @@ describe("Invoice API Integration Test", () => {
       generate: jest.fn(),
       find: jest.fn(),
     } as any;
-
-    facade = new InvoiceFacade(mockInvoiceRepository);
   });
 
   afterEach(async () => {
@@ -94,7 +82,6 @@ describe("Invoice API Integration Test", () => {
   });
 
   it("should find an invoice", async () => {
-    // Cria a nota fiscal antes de buscar
     const input = {
       name: "Invoice 1",
       document: "123456789",

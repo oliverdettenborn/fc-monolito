@@ -13,13 +13,11 @@ const app = express();
 
 app.use(express.json());
 
-// Registra todas as rotas usando as factories
 app.use(createProductRouter());
 app.use(createClientRouter());
 app.use(createCheckoutRouter());
 app.use(createInvoiceRouter());
 
-// Inicializa o Sequelize global
 export const sequelize = new Sequelize({
   dialect: "sqlite",
   storage: ":memory:",
@@ -33,7 +31,6 @@ sequelize.addModels([
   ClientModel,
 ]);
 
-// Sincroniza o banco
 sequelize.sync();
 
 export default app; 

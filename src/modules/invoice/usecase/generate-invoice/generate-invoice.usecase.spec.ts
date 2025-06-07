@@ -1,7 +1,4 @@
 import GenerateInvoiceUseCase from "./generate-invoice.usecase";
-import InvoiceGateway from "../../gateway/invoice.gateway";
-import Invoice from "../../domain/entity/invoice";
-import Id from "../../../@shared/domain/value-object/id.value-object";
 
 const MockRepository = () => {
   return {

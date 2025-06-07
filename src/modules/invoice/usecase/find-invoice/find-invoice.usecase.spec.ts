@@ -1,5 +1,4 @@
 import FindInvoiceUseCase from "./find-invoice.usecase";
-import InvoiceGateway from "../../gateway/invoice.gateway";
 import Invoice from "../../domain/entity/invoice";
 import Address from "../../domain/value-object/address";
 import InvoiceItem from "../../domain/entity/invoice-item";

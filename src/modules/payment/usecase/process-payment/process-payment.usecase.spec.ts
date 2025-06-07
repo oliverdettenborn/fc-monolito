@@ -1,5 +1,3 @@
-import Id from "../../../@shared/domain/value-object/id.value-object";
-import Transaction from "../../domain/transaction";
 import ProcessPaymentUseCase from "./process-payment.usecase";
 
 const MockRepository = () => {
