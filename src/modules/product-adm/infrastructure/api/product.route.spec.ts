@@ -1,70 +1,72 @@
 import express, { Express } from "express";
 import request from "supertest";
 import createProductRouter from "./product.route";
-import { AddProductFacadeInputDto } from "../../facade/product-adm.facade.dto";
-import ProductAdmFacade from "../../facade/product-adm.facade";
+import ProductAdmFacadeFactory from "../../factory/facade.factory";
+import { Sequelize } from "sequelize-typescript";
+import { Umzug } from "umzug";
+import { setupTestDatabase, teardownTestDatabase } from "../../../../test-migrations/config-migrations/test-setup";
+import { ProductModel } from "../../repository/product.model";
 
-describe("Product Routes", () => {
+describe("Product Routes E2E", () => {
   let app: Express;
-  let mockAddProduct: jest.Mock;
-  let mockFacade: any;
+  let sequelize: Sequelize;
+  let migration: Umzug<any>;
+  let facade: any;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     app = express();
     app.use(express.json());
-    mockAddProduct = jest.fn();
-    mockFacade = { addProduct: mockAddProduct };
-    app.use(createProductRouter(mockFacade));
+
+    const setup = await setupTestDatabase({
+      models: [ProductModel],
+    });
+    sequelize = setup.sequelize;
+    migration = setup.migration;
+
+    facade = ProductAdmFacadeFactory.create();
+    app.use(createProductRouter(facade));
+  });
+
+  afterEach(async () => {
+    await teardownTestDatabase(sequelize, migration);
   });
 
   describe("POST /products", () => {
-    const mockProductData: AddProductFacadeInputDto = {
-      id: "1",
-      name: "Product 1",
-      description: "Description 1",
-      purchasePrice: 100,
-      stock: 10
-    };
-
-    it("deve retornar 201 e os dados do produto quando criado com sucesso", async () => {
-      mockAddProduct.mockResolvedValue(mockProductData);
+    it("deve criar um produto com sucesso", async () => {
+      const productData = {
+        name: "Produto Teste",
+        description: "Descrição do produto",
+        purchasePrice: 100,
+        stock: 10
+      };
 
       const response = await request(app)
         .post("/products")
-        .send(mockProductData);
+        .send(productData);
 
       expect(response.status).toBe(201);
-      expect(response.body).toEqual(mockProductData);
-      expect(mockAddProduct).toHaveBeenCalledWith(mockProductData);
+      expect(response.body).toMatchObject({
+        name: productData.name,
+        description: productData.description,
+        purchasePrice: productData.purchasePrice,
+        stock: productData.stock
+      });
+      expect(response.body.id).toBeDefined();
     });
 
-    it("deve retornar 500 se o facade.addProduct lançar erro", async () => {
-      mockAddProduct.mockRejectedValue(new Error("Erro ao criar produto"));
-      
+    it("deve retornar erro ao tentar criar produto sem nome", async () => {
+      const productData = {
+        description: "Descrição do produto",
+        purchasePrice: 100,
+        stock: 10
+      };
+
       const response = await request(app)
         .post("/products")
-        .send(mockProductData);
+        .send(productData);
 
       expect(response.status).toBe(500);
-      expect(response.body.error).toBe("Erro ao criar produto");
+      expect(response.body.error).toBeDefined();
     });
-  });
-
-  it("deve retornar 500 se ocorrer erro no addProduct", async () => {
-    const mockFacade = {
-      addProduct: jest.fn().mockRejectedValue(new Error("Erro simulado")),
-      checkStock: jest.fn(),
-    } as unknown as ProductAdmFacade;
-
-    const app = express();
-    app.use(express.json());
-    app.use(createProductRouter(mockFacade));
-
-    const response = await request(app)
-      .post("/products")
-      .send({ name: "Produto Teste", description: "desc", purchasePrice: 10, stock: 1 });
-
-    expect(response.status).toBe(500);
-    expect(response.body).toHaveProperty("error", "Erro simulado");
   });
 }); 

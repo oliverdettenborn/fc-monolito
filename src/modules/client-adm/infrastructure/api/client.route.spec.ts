@@ -1,77 +1,86 @@
 import express, { Express } from "express";
 import request from "supertest";
 import createClientRouter from "./client.route";
-import { AddClientFacadeInputDto } from "../../facade/client-adm.facade.dto";
-import ClientAdmFacade from "../../facade/client-adm.facade";
+import ClientAdmFacadeFactory from "../../factory/client-adm.facade.factory";
+import { Sequelize } from "sequelize-typescript";
+import { Umzug } from "umzug";
+import { setupTestDatabase, teardownTestDatabase } from "../../../../test-migrations/config-migrations/test-setup";
+import { ClientModel } from "../../repository/client.model";
 
-describe("Client Routes", () => {
+describe("Client Routes E2E", () => {
   let app: Express;
-  let mockAddClient: jest.Mock;
-  let mockFacade: any;
+  let sequelize: Sequelize;
+  let migration: Umzug<any>;
+  let facade: any;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     app = express();
     app.use(express.json());
-    mockAddClient = jest.fn();
-    mockFacade = { add: mockAddClient };
-    app.use(createClientRouter(mockFacade));
+
+    const setup = await setupTestDatabase({
+      models: [ClientModel],
+    });
+    sequelize = setup.sequelize;
+    migration = setup.migration;
+
+    facade = ClientAdmFacadeFactory.create();
+    app.use(createClientRouter(facade));
+  });
+
+  afterEach(async () => {
+    await teardownTestDatabase(sequelize, migration);
   });
 
   describe("POST /clients", () => {
-    const mockClientData: AddClientFacadeInputDto = {
-      id: "1",
-      name: "Client 1",
-      email: "client1@example.com",
-      document: "12345678900",
-      address: {
-        street: "Street 1",
-        number: "123",
-        complement: "Apt 1",
-        city: "City 1",
-        state: "State 1",
-        zipCode: "12345678"
-      }
-    };
-
-    it("deve retornar 201 e os dados do cliente quando criado com sucesso", async () => {
-      mockAddClient.mockResolvedValue(mockClientData);
+    it("deve criar um cliente com sucesso", async () => {
+      const clientData = {
+        name: "Cliente Teste",
+        email: "cliente@teste.com",
+        document: "12345678900",
+        address: {
+          street: "Rua Teste",
+          number: "123",
+          complement: "Apto 1",
+          city: "Cidade Teste",
+          state: "Estado Teste",
+          zipCode: "12345-678"
+        }
+      };
 
       const response = await request(app)
         .post("/clients")
-        .send(mockClientData);
+        .send(clientData);
 
       expect(response.status).toBe(201);
-      expect(response.body).toEqual(mockClientData);
-      expect(mockAddClient).toHaveBeenCalledWith(mockClientData);
+      expect(response.body).toMatchObject({
+        name: clientData.name,
+        email: clientData.email,
+        document: clientData.document,
+        address: clientData.address
+      });
+      expect(response.body.id).toBeDefined();
     });
 
-    it("deve retornar 500 se o facade.addClient lançar erro", async () => {
-      mockAddClient.mockRejectedValue(new Error("Erro ao criar cliente"));
-      
+    it("deve retornar erro ao tentar criar cliente sem email", async () => {
+      const clientData = {
+        name: "Cliente Teste",
+        document: "12345678900",
+        address: {
+          street: "Rua Teste",
+          number: "123",
+          complement: "Apto 1",
+          city: "Cidade Teste",
+          state: "Estado Teste",
+          zipCode: "12345-678"
+        }
+      };
+
       const response = await request(app)
         .post("/clients")
-        .send(mockClientData);
+        .send(clientData);
 
       expect(response.status).toBe(500);
-      expect(response.body.error).toBe("Erro ao criar cliente");
+      expect(response.body.error).toBeDefined();
     });
-  });
-
-  it("deve retornar 500 se ocorrer erro no addClient", async () => {
-    const mockFacade = {
-      add: jest.fn().mockRejectedValue(new Error("Erro simulado")),
-      find: jest.fn(),
-    } as unknown as ClientAdmFacade;
-
-    const app = express();
-    app.use(express.json());
-    app.use(createClientRouter(mockFacade));
-
-    const response = await request(app)
-      .post("/clients")
-      .send({ name: "Teste", email: "teste@teste.com" });
-
-    expect(response.status).toBe(500);
-    expect(response.body).toHaveProperty("error", "Erro simulado");
   });
 }); 

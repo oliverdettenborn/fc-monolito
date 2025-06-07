@@ -1,78 +1,108 @@
 import express, { Express } from "express";
 import request from "supertest";
 import createCheckoutRouter from "./checkout.route";
-import { PlaceOrderFacadeInputDto } from "../../facade/checkout.facade.dto";
-import CheckoutFacade from "../../facade/checkout.facade";
+import CheckoutFacadeFactory from "../../factory/checkout.facade.factory";
+import { Sequelize } from "sequelize-typescript";
+import { Umzug } from "umzug";
+import { setupTestDatabase, teardownTestDatabase } from "../../../../test-migrations/config-migrations/test-setup";
+import { ClientModel } from "../../../client-adm/repository/client.model";
+import { ProductModel } from "../../../product-adm/repository/product.model";
 
-describe("Checkout Routes", () => {
+describe("Checkout Routes E2E", () => {
   let app: Express;
-  let mockPlaceOrder: jest.Mock;
-  let mockFacade: any;
+  let sequelize: Sequelize;
+  let migration: Umzug<any>;
+  let facade: any;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     app = express();
     app.use(express.json());
-    mockPlaceOrder = jest.fn();
-    mockFacade = { placeOrder: mockPlaceOrder };
-    app.use(createCheckoutRouter(mockFacade));
+
+    const setup = await setupTestDatabase({
+      models: [ClientModel, ProductModel],
+    });
+    sequelize = setup.sequelize;
+    migration = setup.migration;
+
+    facade = CheckoutFacadeFactory.create();
+    app.use(createCheckoutRouter(facade));
+  });
+
+  afterEach(async () => {
+    await teardownTestDatabase(sequelize, migration);
   });
 
   describe("POST /checkout", () => {
-    const mockCheckoutData: PlaceOrderFacadeInputDto = {
-      clientId: "1",
-      products: [
-        {
-          productId: "1",
-          quantity: 1
+    it("deve criar um pedido com sucesso", async () => {
+      // Primeiro cria um cliente
+      const clientData = {
+        name: "Cliente Teste",
+        email: "cliente@teste.com",
+        document: "12345678900",
+        address: {
+          street: "Rua Teste",
+          number: "123",
+          complement: "Apto 1",
+          city: "Cidade Teste",
+          state: "Estado Teste",
+          zipCode: "12345-678"
         }
-      ]
-    };
-
-    it("deve retornar 201 e os dados do pedido quando criado com sucesso", async () => {
-      const mockResponse = {
-        id: "1",
-        invoiceId: "1",
-        status: "approved",
-        total: 100,
-        products: mockCheckoutData.products
       };
-      mockPlaceOrder.mockResolvedValue(mockResponse);
+
+      const clientResponse = await request(app)
+        .post("/clients")
+        .send(clientData);
+
+      // Depois cria um produto
+      const productData = {
+        name: "Produto Teste",
+        description: "Descrição do produto",
+        purchasePrice: 100,
+        stock: 10
+      };
+
+      const productResponse = await request(app)
+        .post("/products")
+        .send(productData);
+
+      // Por fim, cria o pedido
+      const checkoutData = {
+        clientId: clientResponse.body.id,
+        products: [
+          {
+            productId: productResponse.body.id,
+            quantity: 1
+          }
+        ]
+      };
 
       const response = await request(app)
         .post("/checkout")
-        .send(mockCheckoutData);
+        .send(checkoutData);
 
       expect(response.status).toBe(201);
-      expect(response.body).toEqual(mockResponse);
-      expect(mockPlaceOrder).toHaveBeenCalledWith(mockCheckoutData);
+      expect(response.body).toMatchObject({
+        clientId: checkoutData.clientId,
+        products: checkoutData.products,
+        status: "approved"
+      });
+      expect(response.body.id).toBeDefined();
+      expect(response.body.invoiceId).toBeDefined();
+      expect(response.body.total).toBeDefined();
     });
 
-    it("deve retornar 500 se o facade.placeOrder lançar erro", async () => {
-      mockPlaceOrder.mockRejectedValue(new Error("Erro ao criar pedido"));
-      
+    it("deve retornar erro ao tentar criar pedido sem produtos", async () => {
+      const checkoutData = {
+        clientId: "1",
+        products: [] as any[]
+      };
+
       const response = await request(app)
         .post("/checkout")
-        .send(mockCheckoutData);
+        .send(checkoutData);
 
       expect(response.status).toBe(500);
-      expect(response.body.error).toBe("Erro ao criar pedido");
+      expect(response.body.error).toBeDefined();
     });
-  });
-
-  it("deve retornar 500 se ocorrer erro no placeOrder", async () => {
-    const mockFacade = {
-      placeOrder: jest.fn().mockRejectedValue(new Error("Erro simulado")),
-    } as unknown as CheckoutFacade;
-
-    const app = express();
-    app.use(express.json());
-    app.use(createCheckoutRouter(mockFacade));
-
-    const response = await request(app)
-      .post("/checkout")
-      .send({ clientId: "1", products: [] });
-
-    expect(response.status).toBe(500);
-    expect(response.body).toHaveProperty("error", "Erro simulado");
   });
 }); 
