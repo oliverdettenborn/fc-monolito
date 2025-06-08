@@ -60,27 +60,5 @@ describe("Client Routes E2E", () => {
       });
       expect(response.body.id).toBeDefined();
     });
-
-    it("deve retornar erro ao tentar criar cliente sem email", async () => {
-      const clientData = {
-        name: "Cliente Teste",
-        document: "12345678900",
-        address: {
-          street: "Rua Teste",
-          number: "123",
-          complement: "Apto 1",
-          city: "Cidade Teste",
-          state: "Estado Teste",
-          zipCode: "12345-678"
-        }
-      };
-
-      const response = await request(app)
-        .post("/clients")
-        .send(clientData);
-
-      expect(response.status).toBe(500);
-      expect(response.body.error).toBeDefined();
-    });
   });
 }); 

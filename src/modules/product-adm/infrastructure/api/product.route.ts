@@ -18,8 +18,8 @@ export default function createProductRouter(facade: ProductAdmFacade = ProductAd
 
   router.post("/products", asyncHandler(async (req: Request, res: Response) => {
     const input: AddProductFacadeInputDto = req.body;
-    await facade.addProduct(input);
-    res.status(201).json(input);
+    const output = await facade.addProduct(input);
+    res.status(201).json(output);
   }));
 
   router.use((err: any, req: Request, res: Response, _next: NextFunction) => {

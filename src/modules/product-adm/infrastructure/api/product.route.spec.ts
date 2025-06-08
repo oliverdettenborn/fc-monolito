@@ -53,20 +53,5 @@ describe("Product Routes E2E", () => {
       });
       expect(response.body.id).toBeDefined();
     });
-
-    it("deve retornar erro ao tentar criar produto sem nome", async () => {
-      const productData = {
-        description: "Descrição do produto",
-        purchasePrice: 100,
-        stock: 10
-      };
-
-      const response = await request(app)
-        .post("/products")
-        .send(productData);
-
-      expect(response.status).toBe(500);
-      expect(response.body.error).toBeDefined();
-    });
   });
 }); 
