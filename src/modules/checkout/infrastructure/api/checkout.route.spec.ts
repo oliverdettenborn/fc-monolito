@@ -6,7 +6,8 @@ import { Sequelize } from "sequelize-typescript";
 import { Umzug } from "umzug";
 import { setupTestDatabase, teardownTestDatabase } from "../../../../test-migrations/config-migrations/test-setup";
 import { ClientModel } from "../../../client-adm/repository/client.model";
-import { ProductModel } from "../../../product-adm/repository/product.model";
+import { ProductModel as ProductModelAdm } from "../../../product-adm/repository/product.model";
+import ProductModel from "../../../store-catalog/repository/product.model";
 
 describe("Checkout Routes E2E", () => {
   let app: Express;
@@ -19,7 +20,7 @@ describe("Checkout Routes E2E", () => {
     app.use(express.json());
 
     const setup = await setupTestDatabase({
-      models: [ClientModel, ProductModel],
+      models: [ClientModel, ProductModelAdm, ProductModel],
     });
     sequelize = setup.sequelize;
     migration = setup.migration;
@@ -34,43 +35,37 @@ describe("Checkout Routes E2E", () => {
 
   describe("POST /checkout", () => {
     it("deve criar um pedido com sucesso", async () => {
-      // Primeiro cria um cliente
-      const clientData = {
+      const client = await ClientModel.create({
+        id: "1",
         name: "Cliente Teste",
         email: "cliente@teste.com",
         document: "12345678900",
-        address: {
-          street: "Rua Teste",
-          number: "123",
-          complement: "Apto 1",
-          city: "Cidade Teste",
-          state: "Estado Teste",
-          zipCode: "12345-678"
-        }
-      };
+        street: "Rua Teste",
+        number: "123",
+        complement: "Apto 1",
+        city: "Cidade Teste",
+        state: "Estado Teste",
+        zipcode: "12345-678",
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
 
-      const clientResponse = await request(app)
-        .post("/clients")
-        .send(clientData);
-
-      // Depois cria um produto
-      const productData = {
+      const product = await ProductModelAdm.create({
+        id: "1",
         name: "Produto Teste",
         description: "Descrição do produto",
         purchasePrice: 100,
-        stock: 10
-      };
+        salesPrice: 200,
+        stock: 10,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      });
 
-      const productResponse = await request(app)
-        .post("/products")
-        .send(productData);
-
-      // Por fim, cria o pedido
       const checkoutData = {
-        clientId: clientResponse.body.id,
+        clientId: client.id,
         products: [
           {
-            productId: productResponse.body.id,
+            productId: product.id,
             quantity: 1
           }
         ]
@@ -80,6 +75,9 @@ describe("Checkout Routes E2E", () => {
         .post("/checkout")
         .send(checkoutData);
 
+      if(response.status !== 201) {
+        console.log('Erro no checkout:', response.body);
+      }
       expect(response.status).toBe(201);
       expect(response.body).toMatchObject({
         clientId: checkoutData.clientId,
