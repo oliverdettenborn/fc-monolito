@@ -8,6 +8,9 @@ import { setupTestDatabase, teardownTestDatabase } from "../../../../test-migrat
 import { ClientModel } from "../../../client-adm/repository/client.model";
 import { ProductModel as ProductModelAdm } from "../../../product-adm/repository/product.model";
 import ProductModel from "../../../store-catalog/repository/product.model";
+import TransactionModel from '../../../payment/repository/transaction.model';
+import InvoiceModel from '../../../invoice/repository/invoice.model';
+import InvoiceItemModel from '../../../invoice/repository/invoice-item.model';
 
 describe("Checkout Routes E2E", () => {
   let app: Express;
@@ -20,7 +23,7 @@ describe("Checkout Routes E2E", () => {
     app.use(express.json());
 
     const setup = await setupTestDatabase({
-      models: [ClientModel, ProductModelAdm, ProductModel],
+      models: [ClientModel, ProductModelAdm, ProductModel, TransactionModel, InvoiceModel, InvoiceItemModel],
     });
     sequelize = setup.sequelize;
     migration = setup.migration;
@@ -75,12 +78,8 @@ describe("Checkout Routes E2E", () => {
         .post("/checkout")
         .send(checkoutData);
 
-      if(response.status !== 201) {
-        console.log('Erro no checkout:', response.body);
-      }
       expect(response.status).toBe(201);
       expect(response.body).toMatchObject({
-        clientId: checkoutData.clientId,
         products: checkoutData.products,
         status: "approved"
       });

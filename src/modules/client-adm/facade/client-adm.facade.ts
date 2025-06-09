@@ -20,7 +20,7 @@ export default class ClientAdmFacade implements ClientAdmFacadeInterface {
     this._addUsecase = usecaseProps.addUsecase;
   }
 
-  async add(input: AddClientFacadeInputDto): Promise<void> {
+  async add(input: AddClientFacadeInputDto): Promise<any> {
     const address = new Address(
       input.address.street,
       input.address.number,
@@ -29,7 +29,7 @@ export default class ClientAdmFacade implements ClientAdmFacadeInterface {
       input.address.state,
       input.address.zipCode
     );
-    await this._addUsecase.execute({ ...input, address });
+    return await this._addUsecase.execute({ ...input, address });
   }
   async find(
     input: FindClientFacadeInputDto

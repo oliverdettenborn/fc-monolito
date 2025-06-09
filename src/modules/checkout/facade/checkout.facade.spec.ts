@@ -59,34 +59,20 @@ describe("Checkout Facade test", () => {
         });
         sequelize = setup.sequelize;
         migration = setup.migration;
-        await sequelize.sync({ force: true });
     });
 
     beforeEach(async () => {
         await ClientModel.create(clientData);
-        
-        await ProductModelStoreCatalog.create({
-            id: "1",
-            name: "Product 1",
-            description: "Product 1 description",
-            salesPrice: 100
-        });
 
         await ProductModelProductAdm.create({
             id: "1",
             name: "Product 1",
             description: "Product 1 description",
             purchasePrice: 100,
+            salesPrice: 100,
             stock: 10,
             createdAt: new Date(),
             updatedAt: new Date()
-        });
-
-        await ProductModelStoreCatalog.create({
-            id: "2",
-            name: "Product 2",
-            description: "Product 2 description",
-            salesPrice: 200
         });
 
         await ProductModelProductAdm.create({
@@ -94,6 +80,7 @@ describe("Checkout Facade test", () => {
             name: "Product 2",
             description: "Product 2 description",
             purchasePrice: 200,
+            salesPrice: 200,
             stock: 20,
             createdAt: new Date(),
             updatedAt: new Date()

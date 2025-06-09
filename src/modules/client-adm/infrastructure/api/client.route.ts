@@ -18,8 +18,8 @@ export default function createClientRouter(facade: ClientAdmFacade = ClientAdmFa
 
   router.post("/clients", asyncHandler(async (req: Request, res: Response) => {
     const input: AddClientFacadeInputDto = req.body;
-    await facade.add(input);
-    res.status(201).json(input);
+    const output = await facade.add(input);
+    res.status(201).json(output);
   }));
 
   router.use((err: any, req: Request, res: Response, _next: NextFunction) => {
