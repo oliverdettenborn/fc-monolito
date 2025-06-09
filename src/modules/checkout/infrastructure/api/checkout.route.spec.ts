@@ -11,6 +11,8 @@ import ProductModel from "../../../store-catalog/repository/product.model";
 import TransactionModel from '../../../payment/repository/transaction.model';
 import InvoiceModel from '../../../invoice/repository/invoice.model';
 import InvoiceItemModel from '../../../invoice/repository/invoice-item.model';
+import { OrderProductModel } from "../../repository/order-product.model";
+import { OrderModel } from "../../repository/order.model";
 
 describe("Checkout Routes E2E", () => {
   let app: Express;
@@ -23,7 +25,7 @@ describe("Checkout Routes E2E", () => {
     app.use(express.json());
 
     const setup = await setupTestDatabase({
-      models: [ClientModel, ProductModelAdm, ProductModel, TransactionModel, InvoiceModel, InvoiceItemModel],
+      models: [ClientModel, ProductModelAdm, ProductModel, TransactionModel, InvoiceModel, InvoiceItemModel, OrderModel, OrderProductModel],
     });
     sequelize = setup.sequelize;
     migration = setup.migration;

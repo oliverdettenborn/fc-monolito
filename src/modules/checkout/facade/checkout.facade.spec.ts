@@ -9,6 +9,8 @@ import { ProductModel as ProductModelProductAdm } from "../../product-adm/reposi
 import InvoiceItemModel from "../../invoice/repository/invoice-item.model";
 import InvoiceModel from "../../invoice/repository/invoice.model";
 import TransactionModel from "../../payment/repository/transaction.model";
+import { OrderProductModel } from "../repository/order-product.model";
+import { OrderModel } from "../repository/order.model";
 
 const clientData = {
     id: "1",
@@ -37,7 +39,9 @@ describe("Checkout Facade test", () => {
                 ProductModelStoreCatalog,
                 InvoiceModel,
                 InvoiceItemModel,
-                TransactionModel
+                TransactionModel,
+                OrderModel,
+                OrderProductModel
             ],
         });
         sequelize = setup.sequelize;

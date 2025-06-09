@@ -8,6 +8,7 @@ import StoreCatalogFacadeInterface from "../../../store-catalog/facade/store-cat
 import Client from "../../domain/client.entity";
 import Order from "../../domain/order.entity";
 import Product from "../../domain/product.entity";
+import CheckoutGateway from "../../gateway/checkout.gateway";
 import { PlaceOrderInputDto, PlaceOrderOutputDto } from "./place-order.dto";
 
 export default class PlaceOrderUseCase {
@@ -17,6 +18,7 @@ export default class PlaceOrderUseCase {
         private _productFacade: ProductAdmFacadeInterface,
         private _paymentFacade: PaymentFacadeInterface,
         private _invoiceFacade: InvoiceFacadeInterface,
+        private _checkoutRepository: CheckoutGateway,
     ) {}
 
     async execute(input: PlaceOrderInputDto): Promise<PlaceOrderOutputDto> {
@@ -61,6 +63,8 @@ export default class PlaceOrderUseCase {
             invoiceId = invoice.id;
             order.approve();
         }
+
+        await this._checkoutRepository.addOrder(order);
 
         return {
             id: order.id.id,

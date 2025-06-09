@@ -2,6 +2,7 @@ import Address from "../../../@shared/domain/value-object/address";
 import Id from "../../../@shared/domain/value-object/id.value-object";
 import { FindClientFacadeOutputDto } from "../../../client-adm/facade/client-adm.facade.interface";
 import Client from "../../domain/client.entity";
+import Order from "../../domain/order.entity";
 import Product from "../../domain/product.entity";
 import { PlaceOrderInputDto } from "./place-order.dto";
 import PlaceOrderUseCase from "./place-order.usecase";
@@ -30,6 +31,13 @@ describe("PlaceOrderUseCase unit test", () => {
         generate: jest.fn().mockResolvedValue({ id: "1" }),
     } as any;
 
+    const mockCheckoutRepository = {
+        addOrder: jest.fn().mockImplementation((order: Order) => {
+            return Promise.resolve(order);
+        }),
+        findOrder: jest.fn()
+    } as any;
+
     let placeOrderUseCase: PlaceOrderUseCase;
 
     beforeEach(() => {
@@ -38,7 +46,8 @@ describe("PlaceOrderUseCase unit test", () => {
             mockBaseStoreCatalogFacade, 
             mockBaseProductAdmFacade,
             mockPaymentFacade,
-            mockInvoiceFacade
+            mockInvoiceFacade,
+            mockCheckoutRepository
         );
     });
 
@@ -265,6 +274,18 @@ describe("PlaceOrderUseCase unit test", () => {
             expect(result.invoiceId).toBe(invoiceId);
             expect(result.status).toBe("approved");
         });
+
+        it("Should save the order in the database", async () => {
+            const input: PlaceOrderInputDto = {
+                clientId: "1",
+                products: [{ productId: "1" }]
+            };
+
+            await placeOrderUseCase.execute(input);
+
+            expect(mockCheckoutRepository.addOrder).toHaveBeenCalled();
+        });
     });
 });
+
 
