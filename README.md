@@ -173,4 +173,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 - Full Cycle
 - Comunidade de desenvolvedores
-- Todos os contribuidores 
+- Todos os contribuidores
