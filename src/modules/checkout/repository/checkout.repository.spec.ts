@@ -46,14 +46,16 @@ describe("Checkout Repository test", () => {
       id: new Id("1"),
       name: "Product 1",
       description: "Description 1",
-      salesPrice: 100
+      salesPrice: 100,
+      quantity: 2
     });
 
     const product2 = new Product({
       id: new Id("2"),
       name: "Product 2",
       description: "Description 2",
-      salesPrice: 200
+      salesPrice: 200,
+      quantity: 3
     });
 
     const order = new Order({
@@ -90,10 +92,12 @@ describe("Checkout Repository test", () => {
     expect(orderDb.OrderProducts[0].product_name).toEqual(product1.name);
     expect(orderDb.OrderProducts[0].product_description).toEqual(product1.description);
     expect(orderDb.OrderProducts[0].price).toEqual(product1.salesPrice);
+    expect(orderDb.OrderProducts[0].quantity).toEqual(product1.quantity);
     expect(orderDb.OrderProducts[1].product_id).toEqual(product2.id.id);
     expect(orderDb.OrderProducts[1].product_name).toEqual(product2.name);
     expect(orderDb.OrderProducts[1].product_description).toEqual(product2.description);
     expect(orderDb.OrderProducts[1].price).toEqual(product2.salesPrice);
+    expect(orderDb.OrderProducts[1].quantity).toEqual(product2.quantity);
   });
 
   it("should find an order", async () => {
@@ -121,7 +125,7 @@ describe("Checkout Repository test", () => {
       product_id: "1",
       product_name: "Product 1",
       product_description: "Description 1",
-      quantity: 1,
+      quantity: 2,
       price: 100,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -133,7 +137,7 @@ describe("Checkout Repository test", () => {
       product_id: "2",
       product_name: "Product 2",
       product_description: "Description 2",
-      quantity: 1,
+      quantity: 3,
       price: 200,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -160,9 +164,59 @@ describe("Checkout Repository test", () => {
     expect(result.products[0].name).toEqual("Product 1");
     expect(result.products[0].description).toEqual("Description 1");
     expect(result.products[0].salesPrice).toEqual(100);
+    expect(result.products[0].quantity).toEqual(2);
     expect(result.products[1].id.id).toEqual("2");
     expect(result.products[1].name).toEqual("Product 2");
     expect(result.products[1].description).toEqual("Description 2");
     expect(result.products[1].salesPrice).toEqual(200);
+    expect(result.products[1].quantity).toEqual(3);
+  });
+
+  it("should create an order with correct quantities", async () => {
+    await OrderModel.create({
+      id: "order-2",
+      client_id: "1",
+      client_name: "Client 1",
+      client_email: "client1@example.com",
+      client_document: "1234567890",
+      client_street: "Rua Teste",
+      client_number: "123",
+      client_complement: "Apto 1",
+      client_city: "Cidade Teste",
+      client_state: "Estado Teste",
+      client_zip_code: "12345-678",
+      status: "approved",
+      total: 500,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+
+    await OrderProductModel.create({
+      id: "op-1",
+      order_id: "order-2",
+      product_id: "1",
+      product_name: "Product 1",
+      product_description: "Description 1",
+      quantity: 2,
+      price: 100,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+    await OrderProductModel.create({
+      id: "op-2",
+      order_id: "order-2",
+      product_id: "2",
+      product_name: "Product 2",
+      product_description: "Description 2",
+      quantity: 3,
+      price: 200,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+
+    const repository = new CheckoutRepository();
+    const result = await repository.findOrder("order-2");
+    expect(result.products[0].quantity).toEqual(2);
+    expect(result.products[1].quantity).toEqual(3);
   });
 }); 

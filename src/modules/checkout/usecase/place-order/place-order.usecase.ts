@@ -71,7 +71,10 @@ export default class PlaceOrderUseCase {
             invoiceId: invoiceId,
             status: order.status,
             total: order.total,
-            products: input.products
+            products: order.products.map((product) => ({
+                productId: product.id.id,
+                quantity: product.quantity
+            }))
         };
     }
 
@@ -128,6 +131,7 @@ export default class PlaceOrderUseCase {
                 name: product.name,
                 description: product.description,
                 salesPrice: product.salesPrice,
+                quantity: item.quantity
             });
         }));
     }
