@@ -13,6 +13,11 @@ export interface AddClientFacadeInputDto {
   }
 }
 
+export interface AddClientFacadeOutputDto {
+  id: string
+  createdAt: Date
+}
+
 export interface FindClientFacadeInputDto {
   id: string
 }
@@ -35,6 +40,6 @@ export interface FindClientFacadeOutputDto {
 }
 
 export default interface ClientAdmFacadeInterface {
-  add(input: AddClientFacadeInputDto): Promise<void>;
+  add(input: AddClientFacadeInputDto): Promise<AddClientFacadeOutputDto>;
   find(input: FindClientFacadeInputDto): Promise<FindClientFacadeOutputDto>;
 }

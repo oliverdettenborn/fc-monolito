@@ -3,7 +3,7 @@ import ProductAdmFacade from "../../facade/product-adm.facade";
 import { AddProductFacadeInputDto } from "../../facade/product-adm.facade.dto";
 import ProductAdmFacadeFactory from "../../factory/facade.factory";
 
-function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
+function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<unknown>) {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       await fn(req, res, next);

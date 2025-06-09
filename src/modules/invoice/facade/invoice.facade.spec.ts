@@ -2,7 +2,6 @@ import { Sequelize } from "sequelize-typescript";
 import { migrator } from "../../../test-migrations/config-migrations/migrator";
 import InvoiceModel from "../repository/invoice.model";
 import InvoiceItemModel from "../repository/invoice-item.model";
-import InvoiceFacade from "./invoice.facade";
 import { Umzug } from "umzug";
 import InvoiceFacadeFactory from "../factory/invoice.facade.factory";
 

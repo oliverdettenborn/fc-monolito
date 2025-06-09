@@ -55,8 +55,7 @@ describe("Client Routes E2E", () => {
           document: clientData.document,
           address: clientData.address
         });
-      console.log('Response completo:', response);
-      console.log('Body da resposta:', response.body);
+
       expect(response.body.id).toBeDefined();
     });
   });

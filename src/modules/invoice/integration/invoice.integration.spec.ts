@@ -1,8 +1,6 @@
 import request from "supertest";
 import { Sequelize } from "sequelize-typescript";
 import { Umzug } from "umzug";
-import InvoiceFacade from "../facade/invoice.facade";
-import InvoiceRepository from "../repository/invoice.repository";
 import { migrator } from "../../../test-migrations/config-migrations/migrator";
 import app from "../../../app";
 import InvoiceModel from "../repository/invoice.model";
@@ -11,7 +9,6 @@ import InvoiceItemModel from "../repository/invoice-item.model";
 describe("Invoice API Integration Test", () => {
   let sequelize: Sequelize;
   let migration: Umzug<any>;
-  let mockInvoiceRepository: jest.Mocked<InvoiceRepository>;
 
   beforeEach(async () => {
     sequelize = new Sequelize({
@@ -25,11 +22,6 @@ describe("Invoice API Integration Test", () => {
 
     migration = migrator(sequelize);
     await migration.up();
-
-    mockInvoiceRepository = {
-      generate: jest.fn(),
-      find: jest.fn(),
-    } as any;
   });
 
   afterEach(async () => {

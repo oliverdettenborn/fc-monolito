@@ -25,23 +25,6 @@ const clientData = {
     updatedAt: new Date()
 }
 
-const productAdmData = {
-    id: "1",
-    name: "Product 1",
-    description: "Product 1 description",
-    purchasePrice: 100,
-    stock: 10,
-    createdAt: new Date(),
-    updatedAt: new Date()
-};
-
-const productStoreData = {
-    id: "1",
-    name: "Product 1",
-    description: "Product 1 description",
-    salesPrice: 100
-};
-
 describe("Checkout Facade test", () => {
     let sequelize: Sequelize;
     let migration: Umzug<any>;

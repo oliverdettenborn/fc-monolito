@@ -1,26 +1,28 @@
-import UseCaseInterface from "../../@shared/usecase/use-case.interface";
-import ClientAdmFacadeInterface, {
+  import ClientAdmFacadeInterface, {
   AddClientFacadeInputDto,
+  AddClientFacadeOutputDto,
   FindClientFacadeInputDto,
   FindClientFacadeOutputDto,
 } from "./client-adm.facade.interface";
 import Address from "../../@shared/domain/value-object/address";
+import FindClientUseCase from "../usecase/find-client/find-client.usecase";
+import AddClientUseCase from "../usecase/add-client/add-client.usecase";
 
 export interface UseCaseProps {
-  findUsecase: UseCaseInterface;
-  addUsecase: UseCaseInterface;
+  findUsecase: FindClientUseCase;
+  addUsecase: AddClientUseCase;
 }
 
 export default class ClientAdmFacade implements ClientAdmFacadeInterface {
-  private _findUsecase: UseCaseInterface;
-  private _addUsecase: UseCaseInterface;
+  private _findUsecase: FindClientUseCase;
+  private _addUsecase: AddClientUseCase;
 
   constructor(usecaseProps: UseCaseProps) {
     this._findUsecase = usecaseProps.findUsecase;
     this._addUsecase = usecaseProps.addUsecase;
   }
 
-  async add(input: AddClientFacadeInputDto): Promise<any> {
+  async add(input: AddClientFacadeInputDto): Promise<AddClientFacadeOutputDto> {
     const address = new Address(
       input.address.street,
       input.address.number,
@@ -29,7 +31,12 @@ export default class ClientAdmFacade implements ClientAdmFacadeInterface {
       input.address.state,
       input.address.zipCode
     );
-    return await this._addUsecase.execute({ ...input, address });
+    const client =  await this._addUsecase.execute({ ...input, address });
+
+    return {
+      id: client.id,
+      createdAt: client.createdAt,
+    };
   }
   async find(
     input: FindClientFacadeInputDto

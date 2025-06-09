@@ -8,12 +8,6 @@ import { setupTestDatabase, teardownTestDatabase } from "../../../../test-migrat
 import InvoiceModel from "../../repository/invoice.model";
 import InvoiceItemModel from "../../repository/invoice-item.model";
 
-interface InvoiceItem {
-  id: string;
-  name: string;
-  price: number;
-}
-
 describe("Invoice Routes E2E", () => {
   let app: Express;
   let sequelize: Sequelize;

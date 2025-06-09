@@ -3,7 +3,7 @@ import ClientAdmFacade from "../../facade/client-adm.facade";
 import { AddClientFacadeInputDto } from "../../facade/client-adm.facade.dto";
 import ClientAdmFacadeFactory from "../../factory/client-adm.facade.factory";
 
-function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
+function asyncHandler(fn: (req: Request, res: Response, next: NextFunction) => Promise<unknown>) {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
       await fn(req, res, next);
